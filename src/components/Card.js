@@ -2,7 +2,7 @@ import { RiStarSFill } from "react-icons/ri";
 
 const Card = ({ title, image, rating, klik, fav }) => {
   return (
-    <div className="bg-yellow-500/50 w-40 h-auto py-2 rounded-lg grid place-content-center px-1 sm:ml-5">
+    <div className="bg-yellow-500/50 w-40 h-[400px] py-2 rounded-lg  px-1 sm:ml-5">
       <div className="flex justify-center">
         <img
           src={
