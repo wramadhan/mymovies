@@ -32,14 +32,14 @@ const DetailMovie = () => {
       .then(result => {
         setSimillarMovie(JSON.parse(result).results)
         console.log(JSON.parse(result).results)
-      //   if (page === 1) {
-      //     setSimillarMovie(JSON.parse(result).results)
-      //   } else {
-      //     var joined = simillarMovie.concat(JSON.parse(result).results);
-      //     setSimillarMovie(joined)
-      //   }
-      //   console.log(JSON.parse(result).results)
-      // }
+        //   if (page === 1) {
+        //     setSimillarMovie(JSON.parse(result).results)
+        //   } else {
+        //     var joined = simillarMovie.concat(JSON.parse(result).results);
+        //     setSimillarMovie(joined)
+        //   }
+        //   console.log(JSON.parse(result).results)
+      }
       )
       .catch(error => console.log('error', error));
   }
