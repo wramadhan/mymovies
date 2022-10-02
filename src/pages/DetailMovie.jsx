@@ -12,37 +12,60 @@ const DetailMovie = () => {
   const { handleFav } = useFavContext();
   const navigate = useNavigate();
   const location = useLocation()
+  const id = useState(location.state.id)
   const [page, setPage] = useState(1)
   const [simillarMovie, setSimillarMovie] = useState()
   useEffect(() => {
     handleSimillarMovie();
   }, [])
-  const handleSimillarMovie = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + process.env.REACT_APP_API_KEY);
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
+  const handleSimillarMovie = () => {
+    var axios = require('axios');
+    var data = '';
+
+    var config = {
+      method: 'get',
+      url: 'https://api.themoviedb.org/3/movie/347201/similar?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=1',
+      headers: {},
+      data: data
     };
 
-    fetch(`https://api.themoviedb.org/3/movie/${location.state.popularity}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        setSimillarMovie(JSON.parse(result).results)
-        console.log(JSON.parse(result).results)
-        //   if (page === 1) {
-        //     setSimillarMovie(JSON.parse(result).results)
-        //   } else {
-        //     var joined = simillarMovie.concat(JSON.parse(result).results);
-        //     setSimillarMovie(joined)
-        //   }
-        //   console.log(JSON.parse(result).results)
-      }
-      )
-      .catch(error => console.log('error', error));
+    axios(config)
+      .then(function (response) {
+        setSimillarMovie(response.data.results);
+        console.log(response.data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
+  // const handleSimillarMovie = () => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Authorization", "Bearer " + process.env.REACT_APP_API_KEY);
+
+  //   var requestOptions = {
+  //     method: 'GET',
+  //     headers: myHeaders,
+  //     redirect: 'follow'
+  //   };
+
+  //   fetch(`https://api.themoviedb.org/3/movie/${id}/347201?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`, requestOptions)
+  //     .then(response => response.text())
+  //     .then(result => {
+  //       setSimillarMovie(JSON.parse(result).results)
+  //       console.log(JSON.parse(result).results)
+  //       //   if (page === 1) {
+  //       //     setSimillarMovie(JSON.parse(result).results)
+  //       //   } else {
+  //       //     var joined = simillarMovie.concat(JSON.parse(result).results);
+  //       //     setSimillarMovie(joined)
+  //       //   }
+  //       //   console.log(JSON.parse(result).results)
+  //     }
+  //     )
+  //     .catch(error => console.log('error', error));
+  // }
 
   const moreSimillar = () => {
     setPage(simillarMovie + 1)
@@ -97,14 +120,19 @@ const DetailMovie = () => {
             <div className='bg-slate-400/50 mt-4 rounded p-2 border-8 border-slate-900/25'>
               <h2 className="text-xl text-center font-bold">Similar Movies</h2>
               <div className='mt-6 flex w-full overflow-x-auto scroll-smooth flex-row'>
-                {simillarMovie.map((item, index) => {
+                {simillarMovie ? simillarMovie.map((item, index) => {
+                  return (
+                    <p key={index}>{item.title}</p>
+                  )
+                }) : <p>data gak kebaca</p>}
+                {/* {simillarMovie.map((item, index) => {
                   return (
                     <div className='mb-4 ml-4' key={index}>
                       <Card title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
                     </div>
                   )
                 })
-                }
+                } */}
                 {/* {simillarMovie ? (
                   simillarMovie.map((item, index) => {
                     return (
