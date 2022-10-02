@@ -18,7 +18,6 @@ function HomePage() {
     getData();
   }, [page]);
 
-
   const getData = async (page) => {
     await axios
       .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
@@ -33,6 +32,7 @@ function HomePage() {
   const handleDetailPage = (item) => {
     navigate(`/detail/${item.id}`, {
       state: {
+        id: item.id,
         title: item.title,
         image: item.poster_path,
         backdrop_path: item.backdrop_path,
