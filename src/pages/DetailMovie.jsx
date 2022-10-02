@@ -13,11 +13,11 @@ const DetailMovie = () => {
   const navigate = useNavigate();
   const location = useLocation()
   const id = useState(location.state.id)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(JSON.parse(1))
   const [simillarMovie, setSimillarMovie] = useState()
   useEffect(() => {
     handleSimillarMovie();
-  }, [])
+  }, [page])
 
   const handleSimillarMovie = () => {
     var axios = require('axios');
@@ -25,14 +25,19 @@ const DetailMovie = () => {
 
     var config = {
       method: 'get',
-      url: 'https://api.themoviedb.org/3/movie/' + id + '/similar?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=1',
+      url: 'https://api.themoviedb.org/3/movie/' + id + '/similar?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=' + page,
       headers: {},
       data: data
     };
 
     axios(config)
       .then(function (response) {
-        setSimillarMovie(response.data.results);
+        if (page === 1) {
+          setSimillarMovie(response.data.results);
+        } else {
+          var joined = simillarMovie.concat(response.data.results);
+          setSimillarMovie(joined)
+        }
         console.log(response.data.results);
       })
       .catch(function (error) {
@@ -67,9 +72,10 @@ const DetailMovie = () => {
   //     .catch(error => console.log('error', error));
   // }
 
+
   const moreSimillar = () => {
-    setPage(simillarMovie + 1)
-    handleSimillarMovie()
+    setPage(page + 1)
+    handleSimillarMovie();
   }
 
   const handleDetailPage = (item) => {
