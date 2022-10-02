@@ -97,7 +97,15 @@ const DetailMovie = () => {
             <div className='bg-slate-400/50 mt-4 rounded p-2 border-8 border-slate-900/25'>
               <h2 className="text-xl text-center font-bold">Similar Movies</h2>
               <div className='mt-6 flex w-full overflow-x-auto scroll-smooth flex-row'>
-                {simillarMovie ? (
+                {simillarMovie.map((item, index) => {
+                  return (
+                    <div className='mb-4 ml-4' key={index}>
+                      <Card title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
+                    </div>
+                  )
+                })
+                }
+                {/* {simillarMovie ? (
                   simillarMovie.map((item, index) => {
                     return (
                       <div className='mb-4 ml-4' key={index}>
@@ -105,8 +113,8 @@ const DetailMovie = () => {
                       </div>
                     )
                   })
-                ) : <></>}
-                <div className='flex flex-col justify-center'>
+                ) : <></>} */}
+                < div className='flex flex-col justify-center' >
                   <button className='hover:bg-yellow-500 text-white bg-slate-600 rounded-full w-auto px-2 h-10 ' onClick={() => moreSimillar()}><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
                 </div>
               </div>
