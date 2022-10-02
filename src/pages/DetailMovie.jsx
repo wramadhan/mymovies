@@ -27,18 +27,20 @@ const DetailMovie = () => {
       redirect: 'follow'
     };
 
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`, requestOptions)
+    fetch(`https://api.themoviedb.org/3/movie/${location.state.popularity}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`, requestOptions)
       .then(response => response.text())
       .then(result => {
-        if (page === 1) {
-          setSimillarMovie(JSON.parse(result).results)
-        } else {
-          // setSimillarMovie(simillarMovie => [...simillarMovie, JSON.parse(result).results])
-          var joined = simillarMovie.concat(JSON.parse(result).results);
-          setSimillarMovie(joined)
-        }
+        setSimillarMovie(JSON.parse(result).results)
         console.log(JSON.parse(result).results)
-      })
+      //   if (page === 1) {
+      //     setSimillarMovie(JSON.parse(result).results)
+      //   } else {
+      //     var joined = simillarMovie.concat(JSON.parse(result).results);
+      //     setSimillarMovie(joined)
+      //   }
+      //   console.log(JSON.parse(result).results)
+      // }
+      )
       .catch(error => console.log('error', error));
   }
 
