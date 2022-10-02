@@ -25,7 +25,7 @@ const DetailMovie = () => {
 
     var config = {
       method: 'get',
-      url: 'https://api.themoviedb.org/3/movie/347201/similar?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=1',
+      url: 'https://api.themoviedb.org/3/movie/' + id + '/similar?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=1',
       headers: {},
       data: data
     };
