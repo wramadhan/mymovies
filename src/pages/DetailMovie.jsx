@@ -133,7 +133,7 @@ const DetailMovie = () => {
                 }) : <p>data gak kebaca</p>} */}
                 {simillarMovie ? simillarMovie.map((item, index) => {
                   return (
-                    <div key={index}>
+                    <div className='mr-4' key={index}>
                       <Card id={item.id} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
                     </div>
                   )
