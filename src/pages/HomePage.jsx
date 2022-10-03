@@ -10,6 +10,7 @@ import Wellcome from '../components/Wellcome';
 
 
 function HomePage() {
+  const [pageNow, setPageNow] = useState('home')
   const navigate = useNavigate();
   const [title, setTitle] = useState([]);
   const [page, setPage] = useState(1);
@@ -65,7 +66,7 @@ function HomePage() {
 
   return (
     <>
-      <NavBar favourites={() => favourites()} />
+      <NavBar pageNow={pageNow} favourites={() => favourites()} />
       <Wellcome />
       <div className="px-6 py-6 bg-gradient-to-r from-teal-400 to-blue-800 h-auto w-full">
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3'>

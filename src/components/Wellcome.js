@@ -8,8 +8,8 @@ const Wellcome = () => {
   };
 
   return (
-    <div className="bg-cover bg-center w-full h-60 bg-[url('https://source.unsplash.com/1600x900/?movie')]">
-      <div className="w-full h-full bg-[#032541]/50 sm:px-10 py-12">
+    <div className="bg-cover bg-center h-auto w-full sm:h-60 bg-[url('https://source.unsplash.com/1600x900/?movie')]">
+      <div className="text-center xs:text-left w-full h-full bg-[#032541]/50 px-4 sm:px-10 py-12">
         <h1 className="text-white w-auto text-5xl font-bold">Wellcome</h1>
         <h2 className="text-white w-auto text-2xl font-semibold">
           Millions of movies, TV shows and people to discover. Explore now.
