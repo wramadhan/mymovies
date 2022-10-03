@@ -45,34 +45,6 @@ const DetailMovie = () => {
       });
 
   }
-  // const handleSimillarMovie = () => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Authorization", "Bearer " + process.env.REACT_APP_API_KEY);
-
-  //   var requestOptions = {
-  //     method: 'GET',
-  //     headers: myHeaders,
-  //     redirect: 'follow'
-  //   };
-
-  //   fetch(`https://api.themoviedb.org/3/movie/${id}/347201?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`, requestOptions)
-  //     .then(response => response.text())
-  //     .then(result => {
-  //       setSimillarMovie(JSON.parse(result).results)
-  //       console.log(JSON.parse(result).results)
-  //       //   if (page === 1) {
-  //       //     setSimillarMovie(JSON.parse(result).results)
-  //       //   } else {
-  //       //     var joined = simillarMovie.concat(JSON.parse(result).results);
-  //       //     setSimillarMovie(joined)
-  //       //   }
-  //       //   console.log(JSON.parse(result).results)
-  //     }
-  //     )
-  //     .catch(error => console.log('error', error));
-  // }
-
-
   const moreSimillar = () => {
     setPage(page + 1)
     handleSimillarMovie();

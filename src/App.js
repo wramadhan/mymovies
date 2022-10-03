@@ -3,6 +3,7 @@ import { FavoritesProvider } from "./context/FavoritesProvider";
 import DetailMovie from "./pages/DetailMovie";
 import Favourite from "./pages/Favourite";
 import Homepage from "./pages/HomePage";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route path="/detail/:id" element={<DetailMovie />} />
+          <Route path="/search/:id" element={<SearchResults />} />
           <Route path="/favourite" element={<Favourite />} />
         </Routes>
       </Router>
