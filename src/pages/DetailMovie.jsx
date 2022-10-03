@@ -51,7 +51,6 @@ const DetailMovie = () => {
   }
 
   const handleDetailPage = (item) => {
-    handleSimillarMovie();
     navigate(`/detail/${item.id}`, {
       state: {
         id: item.id,
