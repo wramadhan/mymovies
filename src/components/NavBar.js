@@ -4,14 +4,18 @@ import { useState } from "react";
 
 const NavBar = () => {
   const [searchBox, setSearchBox] = useState(false);
+  const [burger, setBurger] = useState(false);
 
   const handleSearchBox = () => {
     setSearchBox(!searchBox);
-    console.log(searchBox);
   };
+  const handleBurger = () => {
+    setBurger(!burger);
+  };
+
   return (
     <>
-      <nav className="sticky top-0 w-full h-14 bg-[#032541] px-3 py-1 flex justify-between">
+      <nav className="sticky top-0 w-full h-14 bg-[#032541] px-3 py-2 flex justify-between">
         <div className="flex">
           <Icon
             icon="arcticons:jiocinema"
@@ -23,7 +27,27 @@ const NavBar = () => {
             <Link to={"/"}>Wahyoe Cinema</Link>
           </h1>
         </div>
-        <div className="flex">
+        <div>
+          <button className="xs:hidden" onClick={() => handleBurger()}>
+            {burger ? (
+              <Icon
+                icon="charm:menu-hamburger"
+                color="white"
+                width="37"
+                height="37"
+              />
+            ) : (
+              <Icon
+                icon="carbon:side-panel-close"
+                color="white"
+                width="37"
+                height="37"
+                rotate={1}
+              />
+            )}
+          </button>
+        </div>
+        <div className="flex xsmax:hidden">
           <button className="grid mr-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
             <Link to={"/"}>Home</Link>
           </button>
