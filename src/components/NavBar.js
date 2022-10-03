@@ -1,5 +1,4 @@
 import { MdOutlineLocalMovies } from "react-icons/md";
-import { BsFillMoonStarsFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
@@ -14,7 +13,12 @@ const NavBar = ({ theme }) => {
           </h1>
           <MdOutlineLocalMovies className="text-white w-8 h-8 mt-1 sm:w-11 sm:h-11" />
           <button>
-            <Icon icon="bx:search-alt" color="white" width="50" height="50" />
+            <input
+              type="text"
+              placeholder="Search Movie"
+              className="bg-transparent focus:bg-yello-700 text-white"
+            />
+            {/* <Icon icon="bx:search-alt" color="white" width="50" height="50" /> */}
           </button>
         </div>
         <button className="grid text-white font-bold mt-2 ml-1 text-md sm:text-xl">

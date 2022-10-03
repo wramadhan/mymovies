@@ -5,6 +5,7 @@ import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { withRouter } from "../withRouter";
 import { useFavContext } from '../context/FavoritesProvider'
+import Wellcome from '../components/Wellcome';
 
 
 
@@ -65,6 +66,7 @@ function HomePage() {
   return (
     <>
       <NavBar favourites={() => favourites()} />
+      <Wellcome />
       <div className="px-6 py-6 bg-gradient-to-r from-teal-400 to-blue-800 h-auto w-full">
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3'>
 
