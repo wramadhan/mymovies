@@ -38,7 +38,7 @@ const NavBar = ({ pageNow }) => {
           </h1>
         </div>
         <div>
-          <button className="xs:hidden" onClick={() => handleBurger()}>
+          <button className="sm:hidden" onClick={() => handleBurger()}>
             {burger ? (
               <Icon
                 icon="carbon:side-panel-close"
@@ -57,7 +57,8 @@ const NavBar = ({ pageNow }) => {
             )}
           </button>
         </div>
-        <div className="flex xsmax:hidden">
+
+        <div className="flex smmax:hidden">
           <button className="grid mr-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
             <Link to={"/"}>Home</Link>
           </button>
@@ -66,6 +67,13 @@ const NavBar = ({ pageNow }) => {
           </button>
           <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
             <Link to={"/Favourite"}>Settings</Link>
+          </button>
+          <button className="bg-yellow-500 mr-4 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+            <Link to={"/hiring"}>
+              <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
+                Hire Me?
+              </h1>
+            </Link>
           </button>
           <button onClick={() => handleSearchBox()}>
             {searchBox ? (
@@ -88,7 +96,7 @@ const NavBar = ({ pageNow }) => {
         </div>
       </nav>
       {searchBox ? (
-        <div className="xsmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
+        <div className="smmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
           <input
             onChange={handleInput}
             onKeyPress={handleSearch}
@@ -102,7 +110,7 @@ const NavBar = ({ pageNow }) => {
         </div>
       ) : null}
       {burger ? (
-        <div className="xs:hidden text-center bg-[#032541]">
+        <div className="sm:hidden fixed w-full text-center bg-[#032541]">
           <div className="py-2">
             {pageNow === "home" ? (
               <Link to={"/"}>
@@ -154,6 +162,25 @@ const NavBar = ({ pageNow }) => {
             )}
           </div>
           <div className="py-2">
+            {pageNow === "settings" ? (
+              <button className="bg-yellow-500 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+                <Link to={"/hiring"}>
+                  <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
+                    Hire Me?
+                  </h1>
+                </Link>
+              </button>
+            ) : (
+              <button className="bg-yellow-500 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+                <Link to={"/hiring"}>
+                  <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
+                    Hire Me?
+                  </h1>
+                </Link>
+              </button>
+            )}
+          </div>
+          <div className="py-2">
             <button
               onClick={() => handleSearchBox()}
               className="text-white rounded-full border-white font-bold text-lg w-full"
@@ -161,6 +188,7 @@ const NavBar = ({ pageNow }) => {
               <h2>Search Movie</h2>
             </button>
           </div>
+
           <div className="py-2">
             {searchBox ? (
               <div className="flex">

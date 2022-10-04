@@ -8,7 +8,7 @@ module.exports = {
       lg: "1023px",
       xl: "1279px",
       md: "767px",
-      sm: "639px",
+      sm: "670px",
       xsmax: { max: "500px" },
       xlmax: { max: "1279px" },
       lgmax: { max: "1023px" },
@@ -17,8 +17,8 @@ module.exports = {
       mdmax: { max: "767px" },
       // => @media (max-width: 767px) { ... }
 
-      smmax: { max: "639px" },
-      // => @media (max-width: 639px) { ... }
+      smmax: { max: "670px" },
+      // => @media (max-width: 650px) { ... }
     },
     extend: {},
   },

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
 import { withRouter } from "../withRouter";
 import { useFavContext } from '../context/FavoritesProvider'
 import Wellcome from '../components/Wellcome';
@@ -15,7 +14,10 @@ function HomePage() {
   const navigate = useNavigate();
   const [title, setTitle] = useState([]);
   const [page, setPage] = useState(1);
+  const [pagePopular, setPagePopular] = useState(1);
   const { handleFav } = useFavContext();
+  const [popularButton, setPopularButton] = useState(true)
+  const [popular, setPopular] = useState();
 
   useEffect(() => {
     getData();
@@ -49,22 +51,39 @@ function HomePage() {
       });
   }
 
+  const getPopularMovie = () => {
+    var axios = require('axios');
+    var FormData = require('form-data');
+    var data = new FormData();
 
-  // const getData = async (page) => {
-  //   await axios
-  //     .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
-  //     .then((response) => {
-  //       if (page === 1) {
-  //         setTitle(response.data.results)
-  //       } else {
-  //         var joined = title.concat(response.data.results);
-  //         setTitle(joined)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
-  // };
+    var config = {
+      method: 'get',
+      url: 'https://api.themoviedb.org/3/movie/popular?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=' + pagePopular,
+      headers: {
+        'Authorization': 'Bearer 3d1d8b400ac7b81b81fc3369403005779dca728a'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then((response) => {
+        if (page === 1) {
+          setPopular(response.data.results)
+        } else {
+          var joined = popular.concat(response.data.results);
+          setPopular(joined)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  const handlePopularButton = () => {
+    setPopularButton(false);
+    getPopularMovie();
+  }
 
   const handleDetailPage = (item) => {
     navigate(`/detail/${item.id}`, {
@@ -87,17 +106,15 @@ function HomePage() {
     navigate("/favourite");
   };
 
-  const previousPage = () => {
-    if (page > 1) {
-      setPage(page - 1)
-    }
-    getData(page)
-  };
-
   const nextPage = () => {
     setPage(page + 1)
-    console.log(page)
-    // getData(page)
+  };
+
+  const nextPagePopular = () => {
+    setPagePopular(pagePopular + 1)
+    if (pagePopular > 1) {
+      getPopularMovie();
+    }
   };
 
   return (
@@ -118,11 +135,23 @@ function HomePage() {
             <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
           </div>
         </div>
-        <p>Halaman :{page}</p>
-        <div className='flex justify-center'>
-          <button className='rounded-full mr-2 w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => previousPage(value)}>Previous Page</button>
-          <button className='rounded-full w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => nextPage(value)}>Next Page</button>
-        </div>
+        {popularButton ? (<div className='my-6 flex justify-center'>
+          <button onClick={() => handlePopularButton()} className='rounded-full w-auto px-2 py-[1px] text-white bg-blue-700/50 font-bold'>What's Popular Movie?</button>
+        </div>) : null}
+        {popularButton ? null : (<><h1 className='font-bold text-lg'>Popular Movie</h1>
+          <div className='flex py-4 w-full overflow-x-auto scroll-smooth flex-row'>
+            {popular ? (popular.map((item, index) => {
+              return (
+                <div key={index}>
+                  <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
+                </div>
+              );
+            })) : (<h1>Movies not available</h1>)}
+            <div className='flex flex-col justify-center'>
+              <button onClick={() => nextPagePopular()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
+            </div>
+          </div></>)}
+
       </div>
     </>
   )
