@@ -6,6 +6,7 @@ import axios from 'axios';
 import { withRouter } from "../withRouter";
 import { useFavContext } from '../context/FavoritesProvider'
 import Wellcome from '../components/Wellcome';
+import { Icon } from '@iconify/react';
 
 
 
@@ -68,19 +69,19 @@ function HomePage() {
     <>
       <NavBar pageNow={pageNow} favourites={() => favourites()} />
       <Wellcome />
-      <div className="px-6 py-6 bg-gradient-to-r from-teal-400 to-blue-800 h-auto w-full">
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3'>
-
-
+      <div className="px-6 py-6 h-auto w-full">
+        <h1 className='font-bold text-lg'>Now Playing</h1>
+        <div className='flex py-4 w-full overflow-x-auto scroll-smooth flex-row'>
           {title.map((item, index) => {
             return (
               <div key={index}>
-                <Card id={item.id} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
+                <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
               </div>
             );
           })}
-
-
+          <div className='flex flex-col justify-center'>
+            <button className='bg-yellow-500 shadow-inner shadow-white hover:shadow-black text-white hover:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
+          </div>
         </div>
         <p>Halaman :{page}</p>
         <div className='flex justify-center'>

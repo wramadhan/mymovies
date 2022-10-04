@@ -17,6 +17,12 @@ const NavBar = ({ pageNow }) => {
     setInput(e.target.value);
   };
 
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      alert(input);
+    }
+  };
+
   return (
     <>
       <nav className="sticky top-0 w-full h-14 bg-[#032541] px-3 py-2 flex justify-between">
@@ -84,6 +90,8 @@ const NavBar = ({ pageNow }) => {
       {searchBox ? (
         <div className="xsmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
           <input
+            onChange={handleInput}
+            onKeyPress={handleSearch}
             className="w-11/12 bg-transparent focus:bg-white/50 focus:text-white text-yellow-400 font-semibold px-2 rounded-full"
             type="text"
             placeholder="Search Movie"
@@ -157,6 +165,8 @@ const NavBar = ({ pageNow }) => {
             {searchBox ? (
               <div className="flex">
                 <input
+                  placeholder="Search Movie"
+                  onKeyPress={handleSearch}
                   onChange={handleInput}
                   className="px-2 text-[#032541] rounded-full border-white font-bold text-lg w-full"
                 />
