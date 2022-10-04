@@ -21,16 +21,50 @@ function HomePage() {
     getData();
   }, [page]);
 
-  const getData = async (page) => {
-    await axios
-      .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
+  const getData = () => {
+    var axios = require('axios');
+    var FormData = require('form-data');
+    var data = new FormData();
+
+    var config = {
+      method: 'get',
+      url: 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + process.env.REACT_APP_API_KEY + '&language=en-US&page=' + page,
+      headers: {
+        'Authorization': 'Bearer 3d1d8b400ac7b81b81fc3369403005779dca728a',
+      },
+      data: data
+    };
+
+    axios(config)
       .then((response) => {
-        setTitle(response.data.results)
+        if (page === 1) {
+          setTitle(response.data.results)
+        } else {
+          var joined = title.concat(response.data.results);
+          setTitle(joined)
+        }
       })
-      .catch((error) => {
-        alert(error);
+      .catch(function (error) {
+        console.log(error);
       });
-  };
+  }
+
+
+  // const getData = async (page) => {
+  //   await axios
+  //     .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
+  //     .then((response) => {
+  //       if (page === 1) {
+  //         setTitle(response.data.results)
+  //       } else {
+  //         var joined = title.concat(response.data.results);
+  //         setTitle(joined)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
+  // };
 
   const handleDetailPage = (item) => {
     navigate(`/detail/${item.id}`, {
@@ -62,7 +96,8 @@ function HomePage() {
 
   const nextPage = () => {
     setPage(page + 1)
-    getData(page)
+    console.log(page)
+    // getData(page)
   };
 
   return (
@@ -72,15 +107,15 @@ function HomePage() {
       <div className="px-6 py-6 h-auto w-full">
         <h1 className='font-bold text-lg'>Now Playing</h1>
         <div className='flex py-4 w-full overflow-x-auto scroll-smooth flex-row'>
-          {title.map((item, index) => {
+          {title ? (title.map((item, index) => {
             return (
               <div key={index}>
                 <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
               </div>
             );
-          })}
+          })) : (<h1>Movies not available</h1>)}
           <div className='flex flex-col justify-center'>
-            <button className='bg-yellow-500 shadow-inner shadow-white hover:shadow-black text-white hover:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
+            <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
           </div>
         </div>
         <p>Halaman :{page}</p>
