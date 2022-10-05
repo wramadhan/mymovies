@@ -15,18 +15,22 @@ const Card = ({ release_date, title, image, rating, klik, fav }) => {
     <>
       <div className=" w-40 h-[350px] py-2 rounded-lg  px-1 mr-2">
         <div className="flex justify-center">
-          <img
-            className="rounded-lg"
-            src={
-              image
-                ? "https://image.tmdb.org/t/p/original/" + image
-                : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
-            }
-            alt="Gambar"
-            width={140}
-          />
+          <button onClick={klik}>
+            <img
+              className="rounded-lg"
+              src={
+                image
+                  ? "https://image.tmdb.org/t/p/original/" + image
+                  : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
+              }
+              alt="Gambar"
+              width={140}
+            />
+          </button>
         </div>
-        <h3 className="text-center font-bold">{title}</h3>
+        <button onClick={klik}>
+          <h3 className="text-center font-bold">{title}</h3>
+        </button>
         <h3 className="font-normal italic text-yellow-700 flex text-center ml-1 mt-1">
           <RiStarSFill className="text-2xl" />
           {rating * 10}%
