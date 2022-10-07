@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
-import { Icon } from '@iconify/react';
 import { useLocation } from 'react-router-dom';
 import { withRouter } from "../withRouter";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ import { useFavContext } from '../context/FavoritesProvider'
 const SearchResults = () => {
     const navigate = useNavigate();
     const location = useLocation()
-    const [searchInput, setSearchInput] = useState(location.state.search);
     const [pageNow, setPageNow] = useState('SearchResults');
     const [page, setPage] = useState(1);
     const [datas, setDatas] = useState();
@@ -65,6 +63,9 @@ const SearchResults = () => {
     return (
         <div>
             <NavBar />
+            <h1 className='font-bold text-center text-xl my-4 text-[#032541]'>Search Results</h1>
+            <div className='w-full h-auto border-[#032541] border-[1px]'>
+            </div>
             <div className='grid grid-cols-4 gap-4'>
                 {datas ? (datas.map((item, index) => {
                     return (
@@ -73,9 +74,9 @@ const SearchResults = () => {
                         </div>
                     );
                 })) : (<h1>Movies not available</h1>)}
-                <div className='animate-bounce py-4 flex w-screen text-center justify-center'>
-                    <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button>
-                </div>
+            </div>
+            <div className='animate-bounce py-4 flex w-screen text-center justify-center'>
+                <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button>
             </div>
         </div>
     )

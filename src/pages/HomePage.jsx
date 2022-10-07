@@ -101,10 +101,9 @@ function HomePage() {
           }
         })
       } else if (inputSearch === undefined) {
-        // alert('Please enter a search');
         Swal.fire({
           icon: 'error',
-          title: 'please your search keyword',
+          title: 'please enter your search keyword',
           timer: 3000,
           timerProgressBar: true,
         }).then((result) => {
@@ -187,7 +186,7 @@ function HomePage() {
                 <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
               </div>
             );
-          })) : (<h1>Movies not available</h1>)}
+          })) : (<h1>Loading...</h1>)}
           <div className='flex flex-col justify-center'>
             <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
           </div>
@@ -203,7 +202,7 @@ function HomePage() {
                   <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
                 </div>
               );
-            })) : (<h1>Movies not available</h1>)}
+            })) : (<h1>Loading...</h1>)}
             <div className='flex flex-col justify-center'>
               <button onClick={() => nextPagePopular()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
             </div>
