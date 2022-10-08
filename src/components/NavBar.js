@@ -60,13 +60,22 @@ const NavBar = ({ pageNow }) => {
 
         <div className="flex smmax:hidden">
           <button className="grid mr-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
-            <Link to={"/"}>Home</Link>
+            {pageNow === "home" ? (
+              <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
+                <div className="flex flex-col">
+                  <h2>Home</h2>
+                  <div className="bg-yellow-500 w-16 h-[1px]"></div>
+                </div>
+              </button>
+            ) : (
+              <Link to={"/"}>Home</Link>
+            )}
           </button>
           <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
             <Link to={"/Favourite"}>Favourites</Link>
           </button>
           <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
-            <Link to={"/Favourite"}>Settings</Link>
+            <Link to={"/settings"}>Settings</Link>
           </button>
           <button className="bg-yellow-500 mr-4 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
             <Link to={"/hiring"}>
@@ -75,24 +84,26 @@ const NavBar = ({ pageNow }) => {
               </h1>
             </Link>
           </button>
-          <button onClick={() => handleSearchBox()}>
-            {searchBox ? (
-              <Icon
-                icon="codicon:search-stop"
-                color="white"
-                width="37"
-                height="37"
-                hFlip={true}
-              />
-            ) : (
-              <Icon
-                icon="icon-park-outline:search"
-                color="white"
-                width="37"
-                height="37"
-              />
-            )}
-          </button>
+          {pageNow === "home" ? null : (
+            <button onClick={() => handleSearchBox()}>
+              {searchBox ? (
+                <Icon
+                  icon="codicon:search-stop"
+                  color="white"
+                  width="37"
+                  height="37"
+                  hFlip={true}
+                />
+              ) : (
+                <Icon
+                  icon="icon-park-outline:search"
+                  color="white"
+                  width="37"
+                  height="37"
+                />
+              )}
+            </button>
+          )}
         </div>
       </nav>
       {searchBox ? (
@@ -180,14 +191,16 @@ const NavBar = ({ pageNow }) => {
               </button>
             )}
           </div>
-          <div className="py-2">
-            <button
-              onClick={() => handleSearchBox()}
-              className="text-white rounded-full border-white font-bold text-lg w-full"
-            >
-              <h2>Search Movie</h2>
-            </button>
-          </div>
+          {pageNow === "home" ? null : (
+            <div className="py-2">
+              <button
+                onClick={() => handleSearchBox()}
+                className="text-white rounded-full border-white font-bold text-lg w-full"
+              >
+                <h2>Search Movie</h2>
+              </button>
+            </div>
+          )}
 
           <div className="py-2">
             {searchBox ? (

@@ -4,6 +4,7 @@ import DetailMovie from "./pages/DetailMovie";
 import Favourite from "./pages/Favourite";
 import Hiring from "./pages/Hiring";
 import Homepage from "./pages/HomePage";
+import NotFound from "./pages/NotFound";
 import SearchResults from "./pages/SearchResults";
 import Settings from "./pages/Settings";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/hiring" element={<Hiring />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </FavoritesProvider>

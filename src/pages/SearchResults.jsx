@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../components/Card';
+import { RiStarSFill } from "react-icons/ri";
 import NavBar from '../components/NavBar';
 import { useLocation } from 'react-router-dom';
 import { withRouter } from "../withRouter";
 import { useNavigate } from "react-router-dom";
 import { useFavContext } from '../context/FavoritesProvider'
+// import { RiHeartAddFill } from "react-icons/ri";
+import { TbHeartPlus } from "react-icons/tb";
 
 const SearchResults = () => {
     const navigate = useNavigate();
@@ -13,16 +15,18 @@ const SearchResults = () => {
     const [page, setPage] = useState(1);
     const [datas, setDatas] = useState();
 
+
     useEffect(() => {
         handleSearch();
-    }, [])
+    }, [page])
+
 
     const handleSearch = () => {
         var axios = require('axios');
 
         var config = {
             method: 'get',
-            url: `https://api.themoviedb.org/3/search/movie?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&query=${location.state.search}&page=1&include_adult=false`,
+            url: `https://api.themoviedb.org/3/search/movie?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&query=${location.state.search}&page=${page}&include_adult=false`,
             headers: {
                 'Authorization': 'Bearer 3d1d8b400ac7b81b81fc3369403005779dca728a'
             }
@@ -64,21 +68,47 @@ const SearchResults = () => {
         <div>
             <NavBar />
             <h1 className='font-bold text-center text-xl my-4 text-[#032541]'>Search Results</h1>
-            <div className='w-full h-auto border-[#032541] border-[1px]'>
-            </div>
-            <div className='grid grid-cols-4 gap-4'>
+
+            <div className='px-6'>
                 {datas ? (datas.map((item, index) => {
                     return (
-                        <div key={index}>
-                            <Card id={item.id} release_date={item.release_date} title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} overview={item.overview} vote_average={item.vote_average} klik={() => handleDetailPage(item)} fav={() => handleFav(item)} />
+                        <div className='px-[1px] my-2 flex border-2 rounded-xl shadow-white shadow-inner' key={index}>
+                            <img
+                                className="rounded-l-lg"
+                                src={
+                                    item.poster_path
+                                        ? "https://image.tmdb.org/t/p/original/" + item.poster_path
+                                        : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
+                                }
+                                alt="Gambar"
+                                width={140}
+                            />
+                            <div className='w-full'>
+                                <div className='ml-4 mt-2'>
+                                    <h2 className="xsmax:text-center font-bold">{item.title}</h2>
+                                    <div>
+                                        <h3 className="font-normal italic text-yellow-700 flex ml-1 mt-1 xsmax:justify-center">
+                                            <RiStarSFill className="text-2xl" />
+                                            {item.vote_average * 10}%
+                                        </h3>
+                                    </div>
+                                    <div className='xsmax:text-center mt-6'>
+                                        <button className='rounded-full xsmax:w-full xs:px-2 py-[1px] bg-[#032541] text-center text-md text-white font-medium'>Detail</button>
+                                        <button className='xsmax:hidden rounded-full px-2 py-[1px] bg-[#032541] text-center text-md text-white font-medium'>Add to Favourites</button>
+                                    </div>
+                                    <div className='xs:hidden mt-4'>
+                                        <button className='rounded-full w-full flex justify-center px-5 py-1 bg-[#032541] text-center text-md text-white font-medium'><TbHeartPlus /></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     );
-                })) : (<h1>Movies not available</h1>)}
+                })) : (<h1>loading..</h1>)}
             </div>
             <div className='animate-bounce py-4 flex w-screen text-center justify-center'>
                 <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button>
             </div>
-        </div>
+        </div >
     )
 }
 
