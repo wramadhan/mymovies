@@ -9,6 +9,7 @@ import { useFavContext } from '../context/FavoritesProvider'
 import { TbHeartPlus } from "react-icons/tb";
 
 const SearchResults = () => {
+    const [lost, setLost] = useState();
     const navigate = useNavigate();
     const location = useLocation()
     const [pageNow, setPageNow] = useState('SearchResults');
@@ -34,8 +35,16 @@ const SearchResults = () => {
 
         axios(config)
             .then(function (response) {
-                setDatas(response.data.results);
-                console.log(response.data.results);
+                if (page < 2) {
+                    setDatas(response.data.results);
+                    setLost(response.data.results)
+                } else {
+                    let joined = datas.concat(response.data.results);
+                    console.log(response.data);
+                    console.log(lost)
+                    setLost(response.data.total_pages)
+                    setDatas(joined)
+                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -93,7 +102,7 @@ const SearchResults = () => {
                                         </h3>
                                     </div>
                                     <div className='xsmax:text-center mt-6'>
-                                        <button className='rounded-full xsmax:w-full xs:px-2 py-[1px] bg-[#032541] text-center text-md text-white font-medium'>Detail</button>
+                                        <button onClick={() => handleDetailPage(item)} className='rounded-full xsmax:w-full xs:px-2 py-[1px] bg-[#032541] text-center text-md text-white font-medium'>Detail</button>
                                         <button className='xsmax:hidden rounded-full px-2 py-[1px] bg-[#032541] text-center text-md text-white font-medium'>Add to Favourites</button>
                                     </div>
                                     <div className='xs:hidden mt-4'>
@@ -106,7 +115,9 @@ const SearchResults = () => {
                 })) : (<h1>loading..</h1>)}
             </div>
             <div className='animate-bounce py-4 flex w-screen text-center justify-center'>
-                <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button>
+                {lost !== page ? (<button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button>) : null}
+                {/* <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'>See More Results</button> */}
+
             </div>
         </div >
     )

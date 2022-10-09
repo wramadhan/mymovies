@@ -6,12 +6,13 @@ import { withRouter } from "../withRouter";
 import { useFavContext } from '../context/FavoritesProvider'
 import Wellcome from '../components/Wellcome';
 import { Icon } from '@iconify/react';
-import Swal from 'sweetalert2'
 
 
 function HomePage() {
   const Swal = require('sweetalert2')
-  const [pageNow, setPageNow] = useState('home')
+  const [lost, setLost] = useState();
+  const [lostPop, setLostPop] = useState();
+  const [pageNow] = useState('home')
   const [inputSearch, setInputSearch] = useState();
   const navigate = useNavigate();
   const [title, setTitle] = useState([]);
@@ -43,9 +44,11 @@ function HomePage() {
       .then((response) => {
         if (page === 1) {
           setTitle(response.data.results)
+          setLost(response.data.total_pages)
         } else {
           let joined = title.concat(response.data.results);
           setTitle(joined)
+          setLost(response.data.total_pages)
         }
       })
       .catch(function (error) {
@@ -70,10 +73,12 @@ function HomePage() {
     axios(config)
       .then((response) => {
         if (pagePopular < 2) {
+          setLostPop(response.data.total_pages)
           setPopular(response.data.results)
         } else {
           let joined = popular.concat(response.data.results);
           setPopular(joined)
+          setLostPop(response.data.total_pages)
         }
       })
       .catch(function (error) {
@@ -187,9 +192,9 @@ function HomePage() {
               </div>
             );
           })) : (<h1>Loading...</h1>)}
-          <div className='flex flex-col justify-center'>
+          {lost !== page ? (<div className='flex flex-col justify-center'>
             <button onClick={() => nextPage()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
-          </div>
+          </div>) : null}
         </div>
         {popularButton ? (<div className='animate-bounce my-6 flex justify-center'>
           <button onClick={() => handlePopularButton()} className='shadow-inner text-xl shadow-white active:shadow-black active:text-black rounded-full w-auto px-2 py-[1px] text-white bg-blue-700/50 font-bold text-center'>See Popular Movie?</button>
@@ -203,9 +208,10 @@ function HomePage() {
                 </div>
               );
             })) : (<h1>Loading...</h1>)}
-            <div className='flex flex-col justify-center'>
+            {pagePopular !== lostPop ? (<div className='flex flex-col justify-center'>
               <button onClick={() => nextPagePopular()} className='bg-yellow-500 shadow-inner shadow-white active:shadow-black text-white active:bg-slate-600 rounded-full w-auto px-2 h-10'><Icon icon="ic:outline-navigate-next" color="white" width="24" height="24" /></button>
-            </div>
+            </div>) : null}
+
           </div></>)}
 
       </div>

@@ -38,7 +38,7 @@ const NavBar = ({ pageNow }) => {
           </h1>
         </div>
         <div>
-          <button className="sm:hidden" onClick={() => handleBurger()}>
+          <button className="md:hidden" onClick={() => handleBurger()}>
             {burger ? (
               <Icon
                 icon="carbon:side-panel-close"
@@ -58,13 +58,13 @@ const NavBar = ({ pageNow }) => {
           </button>
         </div>
 
-        <div className="flex smmax:hidden">
+        <div className="flex mdmax:hidden">
           <button className="grid mr-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
             {pageNow === "home" ? (
               <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                 <div className="flex flex-col">
                   <h2>Home</h2>
-                  <div className="bg-yellow-500 w-16 h-[1px]"></div>
+                  <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
                 </div>
               </button>
             ) : (
@@ -77,11 +77,9 @@ const NavBar = ({ pageNow }) => {
           <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
             <Link to={"/settings"}>Settings</Link>
           </button>
-          <button className="bg-yellow-500 mr-4 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+          <button className="bg-[#01B4E4] mr-4 shadow-inner shadow-white active:shadow-black text-[#032541] active:text-white/70 active:bg-slate-600 rounded-full w-auto px-2 h-10">
             <Link to={"/hiring"}>
-              <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
-                Hire Me?
-              </h1>
+              <h1 className=" font-bold text-lg">Hire Me?</h1>
             </Link>
           </button>
           {pageNow === "home" ? null : (
@@ -107,11 +105,11 @@ const NavBar = ({ pageNow }) => {
         </div>
       </nav>
       {searchBox ? (
-        <div className="smmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
+        <div className="mdmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
           <input
             onChange={handleInput}
             onKeyPress={handleSearch}
-            className="w-11/12 bg-transparent focus:bg-white/50 focus:text-white text-yellow-400 font-semibold px-2 rounded-full"
+            className="w-11/12 bg-transparent focus:bg-white/50 focus:text-white text-white font-semibold px-2 rounded-full"
             type="text"
             placeholder="Search Movie"
           />
@@ -121,14 +119,14 @@ const NavBar = ({ pageNow }) => {
         </div>
       ) : null}
       {burger ? (
-        <div className="sm:hidden fixed w-full text-center bg-[#032541]">
+        <div className="md:hidden fixed w-full text-center bg-[#032541]">
           <div className="py-2">
             {pageNow === "home" ? (
               <Link to={"/"}>
                 <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                   <div className="flex flex-col">
                     <h2>Home</h2>
-                    <div className="bg-yellow-500 w-16 h-[1px]"></div>
+                    <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
                   </div>
                 </button>
               </Link>
@@ -146,7 +144,7 @@ const NavBar = ({ pageNow }) => {
                 <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                   <div className="flex flex-col">
                     <h2>Favourites</h2>
-                    <div className="bg-yellow-500 w-16 h-[1px]"></div>
+                    <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
                   </div>
                 </button>
               </Link>
@@ -163,7 +161,7 @@ const NavBar = ({ pageNow }) => {
               <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                 <div className="flex flex-col">
                   <h2>Settings</h2>
-                  <div className="bg-yellow-500 w-16 h-[1px]"></div>
+                  <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
                 </div>
               </button>
             ) : (
@@ -174,19 +172,15 @@ const NavBar = ({ pageNow }) => {
           </div>
           <div className="py-2">
             {pageNow === "settings" ? (
-              <button className="bg-yellow-500 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+              <button className="bg-[#01B4E4] shadow-inner shadow-white active:shadow-black text-[#032541] active:text-white active:bg-slate-600 rounded-full w-auto px-2 h-10">
                 <Link to={"/hiring"}>
-                  <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
-                    Hire Me?
-                  </h1>
+                  <h1 className=" font-bold text-lg">Hire Me?</h1>
                 </Link>
               </button>
             ) : (
-              <button className="bg-yellow-500 shadow-inner shadow-white active:shadow-black active:bg-slate-600 rounded-full w-auto px-2 h-10">
+              <button className="bg-[#01B4E4] shadow-inner shadow-white active:shadow-black  text-[#032541] active:text-white/70 active:bg-slate-600 rounded-full w-auto px-2 h-10">
                 <Link to={"/hiring"}>
-                  <h1 className=" active:text-[#FFF500] text-[#032541] font-bold text-lg">
-                    Hire Me?
-                  </h1>
+                  <h1 className=" font-bold text-lg">Hire Me?</h1>
                 </Link>
               </button>
             )}
