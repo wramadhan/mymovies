@@ -7,6 +7,7 @@ import Homepage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import SearchResults from "./pages/SearchResults";
 import Settings from "./pages/Settings";
+import "@fontsource/poppins"; // Defaults to weight 400.
 
 function App() {
   return (
