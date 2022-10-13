@@ -43,7 +43,7 @@ const DetailMovie = () => {
 
     var config = {
       method: 'get',
-      url: 'http://api.themoviedb.org/3/movie/' + id + '/videos?api_key=47182bd87a80c318c05c57ae7d42b9e2',
+      url: 'https://api.themoviedb.org/3/movie/' + id + '/videos?api_key=47182bd87a80c318c05c57ae7d42b9e2',
       headers: {},
       data: data
     };
