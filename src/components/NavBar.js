@@ -61,28 +61,60 @@ const NavBar = ({ pageNow }) => {
         <div className="flex mdmax:hidden">
           <button className="grid mr-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
             {pageNow === "home" ? (
-              <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
+              <button className="text-white rounded-full border-white font-bold text-md sm:text-xl w-full flex justify-center">
                 <div className="flex flex-col">
                   <h2>Home</h2>
                   <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
                 </div>
               </button>
             ) : (
-              <Link to={"/"}>Home</Link>
+              <Link className="text-md sm:text-xl" to={"/"}>
+                Home
+              </Link>
             )}
           </button>
-          <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
-            <Link to={"/Favourite"}>Favourites</Link>
+          <button className="grid mx-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
+            {pageNow === "favourite" ? (
+              <button className="text-white rounded-full border-white font-bold text-md sm:text-xl w-full flex justify-center">
+                <div className="flex flex-col">
+                  <h2>Favourite</h2>
+                  <div className="bg-[#01B4E4] w-28 h-[1px]"></div>
+                </div>
+              </button>
+            ) : (
+              <Link className="text-md sm:text-xl" to={"/Favourite"}>
+                Favourite
+              </Link>
+            )}
           </button>
-          <button className="mx-4 text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
-            <Link to={"/settings"}>Settings</Link>
-          </button>
-          <button className="bg-[#01B4E4] mr-4 shadow-inner shadow-white active:shadow-black text-[#032541] active:text-white/70 active:bg-slate-600 rounded-full w-auto px-2 h-10">
-            <Link to={"/hiring"}>
-              <h1 className=" font-bold text-lg">Hire Me?</h1>
-            </Link>
-          </button>
-          {pageNow === "home" ? null : (
+          {/* <button className="grid mx-4 text-white font-bold mt-2 ml-1 text-md sm:text-xl">
+            {pageNow === "settings" ? (
+              <button className="text-white rounded-full border-white font-bold text-md sm:text-xl w-full flex justify-center">
+                <div className="flex flex-col">
+                  <h2>Settings</h2>
+                  <div className="bg-[#01B4E4] w-22 h-[1px]"></div>
+                </div>
+              </button>
+            ) : (
+              <Link className="text-md sm:text-xl" to={"/settings"}>
+                Settings
+              </Link>
+            )}
+          </button> */}
+          {pageNow === "hiring" ? (
+            <button className="mr-4 shadow-inner shadow-black text-[#032541] text-white/70 bg-slate-600 rounded-full w-auto px-2 h-10">
+              <Link to={"/hiring"}>
+                <h1 className=" font-bold text-lg">Hire Me?</h1>
+              </Link>
+            </button>
+          ) : (
+            <button className="bg-[#01B4E4] mr-4 shadow-inner shadow-white active:shadow-black text-[#032541] active:text-white/70 active:bg-slate-600 rounded-full w-auto px-2 h-10">
+              <Link to={"/hiring"}>
+                <h1 className=" font-bold text-lg">Hire Me?</h1>
+              </Link>
+            </button>
+          )}
+          {/* {pageNow === "home" ? null : (
             <button onClick={() => handleSearchBox()}>
               {searchBox ? (
                 <Icon
@@ -101,10 +133,10 @@ const NavBar = ({ pageNow }) => {
                 />
               )}
             </button>
-          )}
+          )} */}
         </div>
       </nav>
-      {searchBox ? (
+      {/* {searchBox ? (
         <div className="mdmax:hidden sticky w-full py-2 bg-[#032541] flex justify-between top-14 h-auto">
           <input
             onChange={handleInput}
@@ -117,7 +149,7 @@ const NavBar = ({ pageNow }) => {
             Search
           </button>
         </div>
-      ) : null}
+      ) : null} */}
       {burger ? (
         <div className="md:hidden fixed w-full text-center bg-[#032541]">
           <div className="py-2">
@@ -157,7 +189,7 @@ const NavBar = ({ pageNow }) => {
             )}
           </div>
           <div className="py-2">
-            {pageNow === "settings" ? (
+            {/* {pageNow === "settings" ? (
               <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                 <div className="flex flex-col">
                   <h2>Settings</h2>
@@ -168,7 +200,7 @@ const NavBar = ({ pageNow }) => {
               <button className="text-white rounded-full border-white font-bold text-lg w-full">
                 <h2>Settings</h2>
               </button>
-            )}
+            )} */}
           </div>
           <div className="py-2">
             {pageNow === "settings" ? (
@@ -185,7 +217,7 @@ const NavBar = ({ pageNow }) => {
               </button>
             )}
           </div>
-          {pageNow === "home" ? null : (
+          {/* {pageNow === "home" ? null : (
             <div className="py-2">
               <button
                 onClick={() => handleSearchBox()}
@@ -194,9 +226,9 @@ const NavBar = ({ pageNow }) => {
                 <h2>Search Movie</h2>
               </button>
             </div>
-          )}
+          )} */}
 
-          <div className="py-2">
+          {/* <div className="py-2">
             {searchBox ? (
               <div className="flex">
                 <input
@@ -215,7 +247,7 @@ const NavBar = ({ pageNow }) => {
                 </button>
               </div>
             ) : null}
-          </div>
+          </div> */}
         </div>
       ) : null}
     </>

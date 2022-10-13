@@ -180,7 +180,7 @@ function HomePage() {
 
   return (
     <>
-      <NavBar pageNow={pageNow} favourites={() => favourites()} />
+      <NavBar pageNow={pageNow} />
       <Wellcome handleInputSearch={(e) => handleInputSearch(e)} handleSearch={(e) => handleSearch(e)} handleClickSearch={() => handleClickSearch()} />
       <div className="px-6 py-6 h-auto w-full">
         <h1 className='font-bold text-2xl text-center'>Now Playing</h1>

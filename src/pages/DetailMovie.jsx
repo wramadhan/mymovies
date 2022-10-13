@@ -151,17 +151,17 @@ const DetailMovie = () => {
                   ? "https://image.tmdb.org/t/p/original/" + location.state.image
                   : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
               } className='w-full mdmax:w-7/12 sm:h-9/12' alt='gambar' />
-              <div className='hover:shadow-inner mdmax:text-center hover:shadow-white/50 active:shadow-inner active:shadow-black active:text-white/70 md:flex w-full md:h-3/12 bg-[#032541] justify-center'>
-                <div className='mdmax:mt-12 mdmax:flex mdmax:justify-center'>
-                  <Icon className='mr-2' icon="simple-icons:hbo" color="white" width="55" />
+              <button onClick={handleShowTrailer} className='hover:shadow-inner mdmax:text-center hover:shadow-white/50 active:shadow-inner active:shadow-black active:text-white/70 md:flex w-full md:h-3/12 bg-[#032541] justify-center'>
+                <div className='mdmax:flex mdmax:justify-center'>
+                  <Icon className='mr-2' icon="ant-design:youtube-filled" color="white" width="55" />
                 </div>
                 <div>
                   <h1>Now Streaming</h1>
                   <h2 className='font-semibold'>Watch Now</h2>
                 </div>
-              </div>
+              </button>
             </div>
-            <div className='md:pt-20 ml-6 md:w-7/12'>
+            <div className='md:pt-20 mdmax:ml-6 md:w-8/12'>
               <h1 className='mdmax:my-4 text-3xl mdmax:text-center font-bold'>{location.state.title}</h1>
               <h2 className='mdmax:text-center'>
                 {genres ? (genres.map((item, index) => {
@@ -171,7 +171,7 @@ const DetailMovie = () => {
                 })) : (<span>Unknown Genre</span>)}
               </h2>
               <div className='mdmax:flex justify-center'>
-                <h2 className='text-xl font-semibold mdmax:my-4'><span className='bg-[#032541] rounded-full p-2'>{vote}%</span> User Score</h2>
+                <h2 className='text-xl font-semibold my-4'><span className='bg-[#032541] rounded-full p-2'>{vote}%</span> User Score</h2>
               </div>
               <div className='mdmax:flex mdmax:justify-center'>
                 <button className='bg-[#032541] p-2 rounded-full hover:shadow-white/30 active:shadow-black shadow-inner'>
@@ -204,6 +204,7 @@ const DetailMovie = () => {
                 })) : (<h1>Movie Not Available</h1>)}
               </div>
             </div></>) : null}
+          <h1 className='text-center font-bold text-4xl my-6 text-[#032541]'>Simillar Movie</h1>
           <div className='mt-6 flex w-full overflow-x-auto scroll-smooth flex-row trailer'>
             {simillarMovie ? simillarMovie.map((item, index) => {
               return (

@@ -5,12 +5,12 @@ import { Icon } from '@iconify/react';
 import { BsWhatsapp, BsInstagram, BsLinkedin, BsLink45Deg, BsGithub } from "react-icons/bs";
 
 const Hiring = () => {
-    const Swal = require('sweetalert2')
+    const [pageNow] = useState('hiring');
+    const Swal = require('sweetalert2');
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
     const [message, setMessage] = useState();
-    const [pageNow, setPageNow] = useState()
 
     const handleSendMessage = () => {
         if (name && email && phone && message) {

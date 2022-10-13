@@ -29,13 +29,13 @@ const Card = ({ release_date, title, image, rating, klik, fav }) => {
           </button>
         </div>
         <button onClick={klik}>
-          <h3 className="text-center font-bold">{title}</h3>
+          <h3 className="text-center text-black font-bold">{title}</h3>
         </button>
         <h3 className="font-normal italic text-yellow-700 flex text-center ml-1 mt-1">
           <RiStarSFill className="text-2xl" />
-          {rating * 10}%
+          {Math.round(rating * 100) / 100}%
         </h3>
-        <p>{date}</p>
+        <p className="text-black">{date}</p>
       </div>
       <div className="grid gap-1">
         <button
