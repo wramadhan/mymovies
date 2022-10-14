@@ -29,7 +29,6 @@ const Hiring = () => {
         }
     }
 
-
     const handlePost = () => {
         var axios = require('axios');
         var data = JSON.stringify({
@@ -43,10 +42,10 @@ const Hiring = () => {
 
         var config = {
             method: 'post',
-            url: 'https://api.todoist.com/rest/v1/tasks',
+            url: process.env.REACT_APP_HIRE_URL,
             headers: {
                 'X-Request-Id': '2299859938',
-                'Authorization': 'Bearer 3d1d8b400ac7b81b81fc3369403005779dca728a',
+                'Authorization': 'Bearer ' + process.env.REACT_APP_HIRE_BEARER,
                 'Content-Type': 'application/json',
             },
             data: data
@@ -54,10 +53,35 @@ const Hiring = () => {
 
         axios(config)
             .then(function (response) {
-                console.log(response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'The message has been sent, the developer will respond as soon as possible',
+                    timer: 3000,
+                    timerProgressBar: true,
+                }).then(() => {
+                    setName('')
+                    setEmail('')
+                    setPhone('')
+                    setMessage('')
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // console.log('I was closed by the timer')
+                    }
+                })
+                // console.log(response.data);
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
+                Swal.fire({
+                    icon: 'info',
+                    title: 'The message was not sent. ' + error.message,
+                    timer: 3000,
+                    timerProgressBar: true,
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // console.log('I was closed by the timer')
+                    }
+                })
             });
 
     };
@@ -124,10 +148,10 @@ const Hiring = () => {
                     </div>
 
                     <div className='lgmax:px-6 lg:ml-7 mdmax:mb-6 w-full'>
-                        <input onChange={e => setName(e.target.value)} type='text' placeholder='Your name' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
-                        <input onChange={e => setEmail(e.target.value)} type='email' placeholder='Your email' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
-                        <input onChange={e => setPhone(e.target.value)} type='number' placeholder='Your number phone' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
-                        <textarea onChange={e => setMessage(e.target.value)} rows="2" placeholder='Your message' className='w-full focus:shadow-black shadow-white shadow-inner focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 mb-5 text-xl font-semibold px-5 placeholder:text-white' />
+                        <input value={name} onChange={e => setName(e.target.value)} type='text' placeholder='Your name' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
+                        <input value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Your email' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
+                        <input value={phone} onChange={e => setPhone(e.target.value)} type='number' placeholder='Your number phone' className='w-full focus:shadow-black shadow-white shadow-inner mb-5 focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 text-xl font-semibold px-5 placeholder:text-white' />
+                        <textarea value={message} onChange={e => setMessage(e.target.value)} rows="2" placeholder='Your message' className='w-full focus:shadow-black shadow-white shadow-inner focus:bg-[#0E0C38] text-white bg-[#01B4E4] rounded-lg py-1.5 mb-5 text-xl font-semibold px-5 placeholder:text-white' />
 
                         <button className='rounded-xl font-semibold text-xl px-6 py-1 active:bg-[#0E0C38] active:text-white active:shadow-black shadow-inner text-[#0E0C38] border-2 border-[#0E0C38]' onClick={() => handleSendMessage()}>Send</button>
                     </div>

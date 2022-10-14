@@ -64,7 +64,7 @@ const DetailMovie = () => {
 
     let config = {
       method: 'get',
-      url: 'https://api.themoviedb.org/3/movie/' + id + '?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US',
+      url: 'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + process.env.REACT_APP_API_KEY + '&language=en-US',
       data: data
     };
 

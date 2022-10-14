@@ -27,10 +27,8 @@ const SearchResults = () => {
 
         var config = {
             method: 'get',
-            url: `https://api.themoviedb.org/3/search/movie?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&query=${location.state.search}&page=${page}&include_adult=false`,
-            headers: {
-                'Authorization': 'Bearer 3d1d8b400ac7b81b81fc3369403005779dca728a'
-            }
+            url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${location.state.search}&page=${page}&include_adult=false`,
+            headers: {}
         };
 
         axios(config)

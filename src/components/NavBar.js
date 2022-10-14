@@ -171,12 +171,12 @@ const NavBar = ({ pageNow }) => {
             )}
           </div>
           <div className="py-2">
-            {pageNow === "fav" ? (
+            {pageNow === "favourite" ? (
               <Link to={"/favourite"}>
                 <button className="text-white rounded-full border-white font-bold text-lg w-full flex justify-center">
                   <div className="flex flex-col">
                     <h2>Favourites</h2>
-                    <div className="bg-[#01B4E4] w-16 h-[1px]"></div>
+                    <div className="bg-[#01B4E4] w-26 h-[1px]"></div>
                   </div>
                 </button>
               </Link>
@@ -203,8 +203,9 @@ const NavBar = ({ pageNow }) => {
             )} */}
           </div>
           <div className="py-2">
-            {pageNow === "settings" ? (
-              <button className="bg-[#01B4E4] shadow-inner shadow-white active:shadow-black text-[#032541] active:text-white active:bg-slate-600 rounded-full w-auto px-2 h-10">
+            {pageNow === "hiring" ? (
+              <button className="shadow-inner shadow-black text-white/70 bg-slate-600 rounded-full w-auto px-2 h-10">
+                {/* mr-4 shadow-inner shadow-black text-[#032541] text-white/70 bg-slate-600 rounded-full w-auto px-2 h-10 */}
                 <Link to={"/hiring"}>
                   <h1 className=" font-bold text-lg">Hire Me?</h1>
                 </Link>
