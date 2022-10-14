@@ -50,7 +50,12 @@ const DetailMovie = () => {
 
     axios(config)
       .then(function (response) {
-        setKey(response.data.results);
+        const ok = response.data.results
+        if (ok.length > 0) {
+          setKey(response.data.results);
+        } else if (ok.length == 0) {
+          setKey(false)
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -151,7 +156,7 @@ const DetailMovie = () => {
                   ? "https://image.tmdb.org/t/p/original/" + location.state.image
                   : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
               } className='w-full mdmax:w-7/12 sm:h-9/12' alt='gambar' />
-              <button onClick={handleShowTrailer} className='hover:shadow-inner mdmax:text-center hover:shadow-white/50 active:shadow-inner active:shadow-black active:text-white/70 md:flex w-full md:h-3/12 bg-[#032541] justify-center'>
+              {key ? (<button onClick={handleShowTrailer} className='hover:shadow-inner mdmax:text-center hover:shadow-white/50 active:shadow-inner active:shadow-black active:text-white/70 md:flex w-full md:h-3/12 bg-[#032541] justify-center'>
                 <div className='mdmax:flex mdmax:justify-center'>
                   <Icon className='mr-2' icon="ant-design:youtube-filled" color="white" width="55" />
                 </div>
@@ -159,7 +164,16 @@ const DetailMovie = () => {
                   <h1>Now Streaming</h1>
                   <h2 className='font-semibold'>Watch Now</h2>
                 </div>
-              </button>
+              </button>) : (<button className=' mdmax:text-center  shadow-inner shadow-black text-white/70 md:flex w-full md:h-3/12 bg-[#032541] justify-center'>
+                <div className='mdmax:flex mdmax:justify-center'>
+                  <Icon className='mr-2' icon="ant-design:youtube-filled" color="white" width="55" />
+                </div>
+                <div>
+                  <h1>Trailer not available</h1>
+                  <h2 className='font-semibold'>on youtube</h2>
+                </div>
+              </button>)}
+
             </div>
             <div className='md:pt-20 mdmax:ml-6 md:w-8/12'>
               <h1 className='mdmax:my-4 text-3xl mdmax:text-center font-bold'>{location.state.title}</h1>
@@ -178,10 +192,12 @@ const DetailMovie = () => {
                   <Icon icon="ant-design:heart-filled" color="white" width="17" />
                 </button>
               </div>
-              <div className='mdmax:flex justify-center my-4'>
+              {key ? (<div className='mdmax:flex justify-center my-4'>
                 <button className='hover:bg-[#032541] active:bg-[#032541] p-2 rounded-full hover:shadow-white/30 active:shadow-black shadow-inner font-bold flex active:text-white/60' onClick={handleShowTrailer}>
                   <BsFillPlayFill className='text-xl mr-2' />Watch Movie</button>
-              </div>
+              </div>) : null}
+
+
               <h2 className='font-bold text-lg mdmax:text-center mdmax:my-6'>Overview</h2>
               <p className='text-sm text-justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{overview}</p>
             </div>
